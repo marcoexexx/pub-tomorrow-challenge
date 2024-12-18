@@ -1,6 +1,6 @@
 services:
   app:
-    image: marcoexexx/tomorrow-challenge-app:0.1.0
+    image: marcoexexx/tomorrow-challenge-app-dashboard:0.1.0
     ports:
       - "4173"
     networks:
@@ -33,3 +33,4 @@ services:
 networks:
   tomorrow-challenge-network:
     driver: bridge
+
