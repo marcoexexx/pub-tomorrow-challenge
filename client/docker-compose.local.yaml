@@ -1,0 +1,42 @@
+services:
+  app:
+    image: marcoexexx/tomorrow-challenge-app:0.1.0
+    ports:
+      - "4173:4173"
+    networks:
+      - tomorrow-challenge-network
+    env_file:
+      - ./.env
+    deploy:
+      replicas: 1
+      update_config:
+        parallelism: 1
+        delay: 10s
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:4173"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  dashboard:
+    image: marcoexexx/tomorrow-challenge-app-dashboard:0.1.0
+    ports:
+      - "4174:4173"
+    networks:
+      - tomorrow-challenge-network
+    env_file:
+      - ./.env
+    deploy:
+      replicas: 1
+      update_config:
+        parallelism: 1
+        delay: 10s
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:4173"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+networks:
+  tomorrow-challenge-network:
+    driver: bridge
